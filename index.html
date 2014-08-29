@@ -1,79 +1,98 @@
 <!DOCTYPE html>
-<html>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Papaya : A pure JavaScript medical research image viewer. ">
+<!-- Test: Typical fullscreen usage; autoload an image and overlay. -->
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>Papaya</title>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <body>
+    <!-- CSS debug start -->
+    <link rel="stylesheet" type="text/css" href="../src/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/ui/toolbar.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/ui/menu.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/ui/dialog.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/utilities/nojs.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/utilities/unsupported.css" />
+    <link rel="stylesheet" type="text/css" href="../src/css/viewer/viewer.css" />
+    <!-- CSS debug end -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/myessail/Papaya">View on GitHub</a>
+    <!-- JS debug start -->
+    <script type="text/javascript" src="Papaya/src/js/data/sample-image.js"></script>
+    <script type="text/javascript" src="../src/js/data/talairach-atlas-image.js"></script>
+    <script type="text/javascript" src="../src/js/data/talairach-atlas.js"></script>
 
-          <h1 id="project_title">Papaya</h1>
-          <h2 id="project_tagline">A pure JavaScript medical research image viewer. </h2>
+    <script type="text/javascript" src="../lib/jquery.js"></script>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/myessail/Papaya/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/myessail/Papaya/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+    <script type="text/javascript" src="../src/js/constants.js"></script>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+    <script type="text/javascript" src="../src/js/utilities/base64-binary.js"></script>
+    <script type="text/javascript" src="../src/js/utilities/browser.js"></script>
+    <script type="text/javascript" src="../src/js/utilities/numerics.js"></script>
+    <script type="text/javascript" src="../src/js/utilities/pako-inflate.js"></script>
+    <script type="text/javascript" src="../src/js/utilities/platform.js"></script>
+    <script type="text/javascript" src="../src/js/utilities/utilities.js"></script>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <script type="text/javascript" src="../src/js/core/coordinate.js"></script>
+    <script type="text/javascript" src="../src/js/core/point.js"></script>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+    <script type="text/javascript" src="../src/js/volume/header.js"></script>
+    <script type="text/javascript" src="../src/js/volume/imagedata.js"></script>
+    <script type="text/javascript" src="../src/js/volume/imagedescription.js"></script>
+    <script type="text/javascript" src="../src/js/volume/imagedimensions.js"></script>
+    <script type="text/javascript" src="../src/js/volume/imagerange.js"></script>
+    <script type="text/javascript" src="../src/js/volume/imagetype.js"></script>
+    <script type="text/javascript" src="../src/js/volume/nifti/header-nifti.js"></script>
+    <script type="text/javascript" src="../src/js/volume/nifti/nifti.js"></script>
+    <script type="text/javascript" src="../src/js/volume/orientation.js"></script>
+    <script type="text/javascript" src="../src/js/volume/transform.js"></script>
+    <script type="text/javascript" src="../src/js/volume/volume.js"></script>
+    <script type="text/javascript" src="../src/js/volume/voxeldimensions.js"></script>
+    <script type="text/javascript" src="../src/js/volume/voxelvalue.js"></script>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+    <script type="text/javascript" src="../src/js/ui/dialog.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menu.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitem.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitemcheckbox.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitemfilechooser.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitemrange.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitemslider.js"></script>
+    <script type="text/javascript" src="../src/js/ui/menuitemspacer.js"></script>
+    <script type="text/javascript" src="../src/js/ui/toolbar.js"></script>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+    <script type="text/javascript" src="../src/js/viewer/atlas.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/colortable.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/display.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/preferences.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/screenslice.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/screenvol.js"></script>
+    <script type="text/javascript" src="../src/js/viewer/viewer.js"></script>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+    <script type="text/javascript" src="../src/js/main.js"></script>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+    <script type="text/javascript" src="../src/js/license.js"></script>
+    <!-- JS debug end -->
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+    <script type="text/javascript">
+        /* DO NOT EDIT (start) -- papayaLoadableImages is generated by papaya-builder and is here for debugging purposes only */
+        var papayaLoadableImages = [
+            {"nicename": "Sample Image", "name": "sample_image", "encode": "sample_image"},
+            {nicename:"Atlas", name:"Talairach_labels_1mm", encode:"Talairach_labels_1mm", hide:true}
+        ];
+        /* DO NOT EDIT (end) */
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+        var params = [];
+        params["images"] = ["sample_image"];
+        params["atlas"] = ["Talairach_labels_1mm"];
+    </script>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+    <title>URL Load</title>
+</head>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Papaya maintained by <a href="https://github.com/myessail">myessail</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+<body>
+<div class="papaya" data-params="params"></div>
+</body>
 </html>
